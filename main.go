@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
@@ -10,6 +12,10 @@ import (
 type Game struct{}
 
 func (g *Game) Update() error {
+	if ebiten.IsKeyPressed(ebiten.KeyQ) {
+		fmt.Println("Bye!")
+		os.Exit(0)
+	}
 	return nil
 }
 
