@@ -13,12 +13,15 @@ import (
 const (
 	screenWidth, screenHeight = 320, 240
 	boidCount                 = 420
+	viewRadius                = 13
+	adjRate                   = 0.015
 )
 
 var (
-	cyan  = color.RGBA{106, 214, 227, 255}
-	black = color.RGBA{0, 0, 0, 255}
-	boids [boidCount]*Boid
+	cyan    = color.RGBA{106, 214, 227, 255}
+	black   = color.RGBA{0, 0, 0, 255}
+	boids   [boidCount]*Boid
+	boidMap [screenWidth + 1][screenHeight + 1]int
 )
 
 type Game struct{}
@@ -50,6 +53,13 @@ func (g *Game) Layout(_, _ int) (w, h int) {
 }
 
 func main() {
+	// pre-fill map array with -1
+	for i, row := range boidMap {
+		for j := range row {
+			boidMap[i][j] = -1
+		}
+	}
+
 	ebiten.SetWindowTitle("BOIDS simulation")
 	ebiten.SetWindowSize(screenWidth*2, screenHeight*2)
 

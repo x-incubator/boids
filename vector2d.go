@@ -72,11 +72,11 @@ func (v1 Vector2D) DivisionV(d float64) Vector2D {
 	}
 }
 
-func (v1 Vector2D) limit(lower, upper float64) Vector2D {
+func (v1 Vector2D) Limit(lower, upper float64) Vector2D {
 	return Vector2D{
 		x: math.Min(math.Max(v1.x, lower), upper),
 
-		y: math.Min(math.Max(v1.x, lower), upper),
+		y: math.Min(math.Max(v1.y, lower), upper),
 	}
 }
 
