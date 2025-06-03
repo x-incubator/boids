@@ -7,15 +7,17 @@ import (
 	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
 const (
 	screenWidth, screenHeight = 320, 240
-	boidCount                 = 69
+	boidCount                 = 420
 )
 
 var (
-	white = color.White
+	cyan  = color.RGBA{106, 214, 227, 255}
+	black = color.RGBA{0, 0, 0, 255}
 	boids [boidCount]*Boid
 )
 
@@ -30,12 +32,16 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
+	screen.Fill(black)
 	for _, boid := range boids {
-		screen.Set(int(boid.position.x+1), int(boid.position.y), white)
-		screen.Set(int(boid.position.x-1), int(boid.position.y), white)
-
-		screen.Set(int(boid.position.x), int(boid.position.y+1), white)
-		screen.Set(int(boid.position.x), int(boid.position.y-1), white)
+		vector.DrawFilledCircle(
+			screen,
+			float32(boid.position.x),
+			float32(boid.position.y+1),
+			4,
+			cyan,
+			true,
+		)
 	}
 }
 
