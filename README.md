@@ -2,6 +2,11 @@
 
 A simple simulation of [Boids](https://en.wikipedia.org/wiki/Boids) in [Go](https://go.dev/) using [Ebitengine](https://ebitengine.org/).
 
+<div align="center"> 
+    <img src="./assets/demo.gif" />
+    <p>demo.gif</p>
+</div>
+
 ### Getting started
 
 - Install system dependencies Ebitengine depends on
