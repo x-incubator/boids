@@ -23,7 +23,7 @@ var (
 	black   = color.RGBA{0, 0, 0, 255}
 	boids   [boidCount]*Boid
 	boidMap [screenWidth + 1][screenHeight + 1]int
-	lock    = sync.Mutex{}
+	rwLock  = sync.RWMutex{}
 )
 
 type Game struct{}
@@ -63,7 +63,7 @@ func main() {
 	}
 
 	ebiten.SetWindowTitle("BOIDS simulation")
-	ebiten.SetWindowSize(screenWidth*2, screenHeight*2)
+	ebiten.SetWindowSize(screenWidth*3, screenHeight*3)
 
 	for i := 0; i < boidCount; i++ {
 		createBoid(i)
