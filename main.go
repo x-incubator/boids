@@ -8,14 +8,13 @@ import (
 	"sync"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
 const (
 	screenWidth, screenHeight = 320, 240
 	boidCount                 = 420
-	viewRadius                = 13
-	adjRate                   = 0.015
+	viewRadius                = 9
+	adjRate                   = 0.025
 )
 
 var (
@@ -39,14 +38,11 @@ func (g *Game) Update() error {
 func (g *Game) Draw(screen *ebiten.Image) {
 	screen.Fill(black)
 	for _, boid := range boids {
-		vector.DrawFilledCircle(
-			screen,
-			float32(boid.position.x),
-			float32(boid.position.y+1),
-			4,
-			cyan,
-			true,
-		)
+		screen.Set(int(boid.position.x-1), int(boid.position.y), cyan)
+		screen.Set(int(boid.position.x-2), int(boid.position.y), cyan)
+		screen.Set(int(boid.position.x), int(boid.position.y), cyan)
+		screen.Set(int(boid.position.x), int(boid.position.y-1), cyan)
+		screen.Set(int(boid.position.x), int(boid.position.y-2), cyan)
 	}
 }
 
@@ -63,7 +59,7 @@ func main() {
 	}
 
 	ebiten.SetWindowTitle("BOIDS simulation")
-	ebiten.SetWindowSize(screenWidth*3, screenHeight*3)
+	ebiten.SetWindowSize(screenWidth*2, screenHeight*2)
 
 	for i := 0; i < boidCount; i++ {
 		createBoid(i)
