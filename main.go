@@ -5,6 +5,7 @@ import (
 	"image/color"
 	"log"
 	"os"
+	"sync"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -22,6 +23,7 @@ var (
 	black   = color.RGBA{0, 0, 0, 255}
 	boids   [boidCount]*Boid
 	boidMap [screenWidth + 1][screenHeight + 1]int
+	lock    = sync.Mutex{}
 )
 
 type Game struct{}
